@@ -27,7 +27,7 @@
 @interface UIImage (UIKit)
 
 // Remain the canvas size and fill the cut part with transplant data.
-- (UIImage *)cropToSizeRemainCanvasSize:(CGSize)size;
+- (UIImage *)cropToSizeRemainCanvasSize:(CGSize)size __deprecated;
 
 // Crop the image to a fit size
 - (UIImage *)cropToSize:(CGSize)size;
@@ -36,7 +36,11 @@
 - (UIImage *)cropInRect:(CGRect)cropRect;
 
 // Scale canvas to specifed rect
-- (UIImage *)scalCanvasFitRect:(CGRect)fitRect;
+- (UIImage *)scalCanvasFitRect:(CGRect)fitRect __deprecated_msg("Spell error, now use [scaleCanvasFitRect:]");
+- (UIImage *)scaleCanvasFitRect:(CGRect)fitRect;
+
+// Crop the middle of current image and scaled to fit the specified size.
+- (UIImage *)middleImageScaledToFitSize:(CGSize)fitSize;
 
 // Resize the image to fit size.
 - (UIImage *)scaledToSize:(CGSize)size;

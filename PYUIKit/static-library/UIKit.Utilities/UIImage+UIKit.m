@@ -80,13 +80,24 @@
 
 - (UIImage *)cropInRect:(CGRect)cropRect
 {
-    CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, cropRect);
-    UIImage *_newImage = [UIImage imageWithCGImage:subImageRef];
+    CGRect _cr = cropRect;
+    _cr.origin.x *= self.scale;
+    _cr.origin.y *= self.scale;
+    _cr.size.width *= self.scale;
+    _cr.size.height *= self.scale;
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, _cr);
+    UIImage *_newImage = [UIImage imageWithCGImage:subImageRef
+                                             scale:self.scale
+                                       orientation:self.imageOrientation];
     CGImageRelease(subImageRef);
     return _newImage;
 }
 
 - (UIImage *)scalCanvasFitRect:(CGRect)fitRect
+{
+    return [self scaleCanvasFitRect:fitRect];
+}
+- (UIImage *)scaleCanvasFitRect:(CGRect)fitRect
 {
     float _ds = (fitRect.size.width / fitRect.size.height);
     float _ix = self.size.width * self.scale, _iy = self.size.height * self.scale;
@@ -106,25 +117,19 @@
         _canvasRect.origin.y = (_canvasRect.size.height - _iy) / 2;
     }
 
-    PYStopWatch *sw = [PYStopWatch object];
-    [sw start];
     // Create the context as canvas.
     if ( PYIsRetina ) {
         UIGraphicsBeginImageContextWithOptions(_canvasRect.size, NO, [UIScreen mainScreen].scale);
     } else {
         UIGraphicsBeginImageContext(_canvasRect.size);
     }
-    DUMPFloat([sw tick]);
     CGRect _imgRect = _canvasRect;
     _imgRect.size.width = _ix;
     _imgRect.size.height = _iy;
     [self drawInRect:_imgRect];
-    DUMPFloat([sw tick]);
     UIImage *_newImage = UIGraphicsGetImageFromCurrentImageContext();
-    DUMPFloat([sw tick]);
     
     UIGraphicsEndImageContext();
-    DUMPFloat([sw tick]);
     return _newImage;
 }
 
@@ -141,6 +146,34 @@
 	UIGraphicsEndImageContext();
     
 	return newImage;
+}
+
+- (UIImage *)middleImageScaledToFitSize:(CGSize)fitSize
+{
+    if ( self == nil ) return nil;
+    float _ik = self.size.width / self.size.height;
+    float _fk = fitSize.width / fitSize.height;
+    
+    float _fw = fitSize.width, _fh = fitSize.height;
+    if ( _ik > _fk ) {
+        _fw = _fh * _ik;
+    } else {
+        _fh = _fw / _ik;
+    }
+    if ( PYIsRetina ) {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(_fw, _fh), NO, self.scale);
+    } else {
+        UIGraphicsBeginImageContext(CGSizeMake(_fw, _fh));
+    }
+    [self drawInRect:CGRectMake(0, 0, _fw, _fh)];
+    UIImage *_scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    CGRect _cropRect = CGRectMake((_fw - fitSize.width) / 2,
+                                  (_fh - fitSize.height) / 2,
+                                  fitSize.width,
+                                  fitSize.height);
+    return [_scaledImage cropInRect:_cropRect];
 }
 
 + (UIImage *)PYImageWithData:(NSData *)theData
