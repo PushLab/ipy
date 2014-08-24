@@ -46,6 +46,7 @@ PYKVO_CHANGED_RESPONSE(_bindTableView, frame);
     [UITableManager registerEvent(PYTableManagerEventWillEndScroll)];
     [UITableManager registerEvent(PYTableManagerEventEndScroll)];
     [UITableManager registerEvent(PYTableManagerEventDeleteCell)];
+    [UITableManager registerEvent(PYTableManagerEventGetCellClass)];
 
     // Register extend event
     [UITableManager registerEvent(UITableManagerEventGetSectionHeader)];

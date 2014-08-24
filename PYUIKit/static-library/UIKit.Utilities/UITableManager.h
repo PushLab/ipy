@@ -40,7 +40,7 @@ typedef NS_OPTIONS(NSUInteger, UITableManagerEvent) {
     UITableManagerEventEndUpdateContent         = PYTableManagerEventUserDefined + 12,
     UITableManagerEventSectionIndexTitle        = PYTableManagerEventUserDefined + 13,
     UITableManagerEventCanDeleteCell            = PYTableManagerEventUserDefined + 14,
-    UITableManagerEventGetCellClass             = PYTableManagerEventUserDefined + 15,
+    UITableManagerEventGetCellClass             = PYTableManagerEventGetCellClass,
     UITableManagerEventGetSectionTitle          = PYTableManagerEventUserDefined + 16,
 };
 

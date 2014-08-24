@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E622DCB119A3D8EA00D79B9F /* PYTableManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E622DCAF19A3D8EA00D79B9F /* PYTableManager.h */; };
+		E622DCB119A3D8EA00D79B9F /* PYTableManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E622DCAF19A3D8EA00D79B9F /* PYTableManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E622DCB219A3D8EA00D79B9F /* PYTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E622DCB019A3D8EA00D79B9F /* PYTableManager.m */; };
 		E625C72C193EBE1100F77D43 /* PYTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E625C728193EBE1100F77D43 /* PYTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E645A630193C841B008368B8 /* PYApperance.h in Headers */ = {isa = PBXBuildFile; fileRef = E645A62A193C841B008368B8 /* PYApperance.h */; settings = {ATTRIBUTES = (Public, ); }; };

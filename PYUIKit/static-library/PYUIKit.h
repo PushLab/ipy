@@ -43,6 +43,7 @@
 #import "PYTableCell.h"
 #import "PYTableManagerProtocol.h"
 #import "UITableManager.h"
+#import "PYTableManager.h"
 
 // Kernel
 #import "PYLayer.h"

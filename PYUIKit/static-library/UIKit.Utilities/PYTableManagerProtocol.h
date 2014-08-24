@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, PYTableManagerEvent) {
     PYTableManagerEventEndScroll,           // PYActionGet
     PYTableManagerEventDeleteCell,          // PYTableManagerCellEvent
     PYTableManagerEventClassForCell,        // PYTableManagerClassForCell
+    PYTableManagerEventGetCellClass,
     PYTableManagerEventUserDefined  = 0x00F0// User Defined Event start from the next value.
 };
 
