@@ -25,6 +25,7 @@
 #import "PYApiManager.h"
 
 static PYApiManager *_g_apiManager;
+static BOOL _isDebug = NO;
 
 @interface PYApiManager (Internal)
 // Singleton interface.
@@ -65,6 +66,11 @@ PYSingletonDefaultImplementation
         _apiCache = [PYGlobalDataCache gdcWithIdentify:@"com.ipy.network.apicache"];
     }
     return self;
+}
+
++ (void)enableDebug:(BOOL)enable
+{
+    _isDebug = enable;
 }
 
 + (NSString *)lastRequestTimeForApi:(NSString *)identifier
@@ -158,6 +164,18 @@ PYSingletonDefaultImplementation
                    forHTTPHeaderField:@"Last-Modified-Since"];
                 }
             }
+            if ( _isDebug ) {
+                BEGIN_MAINTHREAD_INVOKE
+                if ( [[_urlReq.HTTPMethod lowercaseString] isEqualToString:@"post"] ) {
+                    PYLog(@"{\nRequest URL: %@\nMethod: POST\nBody: %@\n}",
+                          _urlReq.URL.absoluteString,
+                          _urlReq.HTTPBody);
+                } else {
+                    PYLog(@"{\nRequest URL: %@\nMethod: GET\n}",
+                          _urlReq.URL.absoluteString);
+                }
+                END_MAINTHREAD_INVOKE
+            }
             NSError *_error;
             NSHTTPURLResponse *_response;
             NSData *_data = [NSURLConnection
@@ -169,6 +187,9 @@ PYSingletonDefaultImplementation
             if ( _response.statusCode >= 400 ) {
                 // Server error
                 BEGIN_MAINTHREAD_INVOKE
+                if ( _isDebug ) {
+                    PYLog(@"Request Failed: %d", (int)_response.statusCode);
+                }
                 if ( failed ) failed( [PYApiManager apiErrorWithCode:PYApiErrorInvalidateHttpStatus] );
                 END_MAINTHREAD_INVOKE
                 break;
@@ -195,6 +216,13 @@ PYSingletonDefaultImplementation
                 [[PYApiManager shared]
                  updateModifiedTime:_lastModifiedDateString
                  forIdentifier:_requestIdentifier];
+            }
+            
+            if ( _isDebug ) {
+                NSString *_sBody = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+                BEGIN_MAINTHREAD_INVOKE
+                PYLog(@"Response: \n%@", _sBody);
+                END_MAINTHREAD_INVOKE
             }
 
             // Parse the data

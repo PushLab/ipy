@@ -52,6 +52,9 @@ typedef NS_ENUM(NSInteger, PYApiErrorCode){
 // Get the error message in detail
 + (NSString *)errorMessageWithCode:(PYApiErrorCode)code;
 
+// If enable the debug mode(which will output the request info)
++ (void)enableDebug:(BOOL)enable;
+
 @end
 
 typedef void (^PYApiActionInit)(PYApiRequest *request);
