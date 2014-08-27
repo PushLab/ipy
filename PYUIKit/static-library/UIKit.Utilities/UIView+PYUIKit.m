@@ -51,8 +51,14 @@
 {
     CGSize _windowSize = [UIScreen mainScreen].applicationFrame.size;
     UIGraphicsBeginImageContextWithOptions(_windowSize, NO, [UIScreen mainScreen].scale);
-    [[UIApplication sharedApplication].keyWindow.rootViewController.view.layer
-     renderInContext:UIGraphicsGetCurrentContext()];
+    if ( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view
+         drawViewHierarchyInRect:[UIScreen mainScreen].applicationFrame
+         afterScreenUpdates:YES];
+    } else {
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view.layer
+         renderInContext:UIGraphicsGetCurrentContext()];
+    }
     UIImage *_screenImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return _screenImage;

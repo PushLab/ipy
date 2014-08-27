@@ -167,6 +167,10 @@ CGFloat const       PYScrollOverheadRate                = .45;
                               withinTimePieces:PYScrollDirectOffsetTimePiece];
     } else {
         [self setMovingOffset:_movingOffset withAnimatDuration:0];
+        // Tell the delegate.
+        if ( [self.delegate respondsToSelector:@selector(pyScrollViewDidEndScroll:willDecelerate:)] ) {
+            [self.delegate pyScrollViewDidEndScroll:self willDecelerate:NO];
+        }
     }
 }
 
@@ -380,6 +384,21 @@ CGFloat const       PYScrollOverheadRate                = .45;
                                      self.bounds.size.width,
                                      _contentOffset.height)
          animated:YES];
+    }
+}
+
+- (void)scrollToPage:(NSUInteger)pageIndex animated:(BOOL)animated
+{
+    @synchronized( self ) {
+        if ( _pagable == NO ) return;
+        if ( _decelerateTimer != nil ) return;
+        CGSize _ctntOffset = _contentOffset;
+        CGFloat _value = _SIDE_ITEM(_ctntOffset);
+        int _t = ((_value + PYINDICATION_F(1.f, _value)) / _SIDE_ITEM(_pageSize));
+        _value = _SIDE_ITEM(_pageSize) * (pageIndex - _t);
+        _SIDE_ITEM(_ctntOffset) += _value;
+        _VSIDE_ITEM(_ctntOffset) = 0.f;
+        [self setContentOffset:_ctntOffset animated:animated];
     }
 }
 

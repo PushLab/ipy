@@ -135,6 +135,8 @@ extern CGFloat const            PYScrollOverheadRate;
 @property (nonatomic, assign)   CGSize                              pageSize;
 @property (nonatomic, assign, setter = setPagable:) BOOL            isPagable;
 @property (nonatomic, assign)   NSUInteger                          maxDeceleratePageCount;
+// Scroll to specified page
+- (void)scrollToPage:(NSUInteger)pageIndex animated:(BOOL)animated;
 // if pagable, and doesn't scroll half page, if can fallback to the last page.
 // default is NO.
 @property (nonatomic, assign)   BOOL                                canFallback;

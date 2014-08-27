@@ -54,6 +54,11 @@
         PYASSERT(([_contentDataSource isKindOfClass:[NSArray class]]),
                  @"Hey! Why you give me an identify which does not point to an array object?");
         [_bindTableView reloadData];
+        NSArray *_visiableCells = _bindTableView.visiableCells;
+        PYTableViewCell *_firstCell = [_visiableCells safeObjectAtIndex:0];
+        if ( _firstCell == nil ) return;
+        _willStopItem = [_contentDataSource safeObjectAtIndex:_firstCell.cellIndex];
+        _didStopItem = _willStopItem;
     }
 }
 

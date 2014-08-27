@@ -25,6 +25,13 @@
 #import "PYNavigationController.h"
 #import "PYApperance.h"
 
+
+@interface PYNavigationController ()
+
+- (void)_resetMaskView;
+
+@end
+
 @interface PYApperance (__navigation_controller)
 
 - (void)_keyViewController:(PYNavigationController *)nav changedTransform:(CGAffineTransform)transform;
@@ -35,20 +42,21 @@
 
 - (void)_keyViewController:(PYNavigationController *)nav changedTransform:(CGAffineTransform)transform
 {
-    for ( UINavigationController *_nav in _mainViewControllers ) {
+    for ( PYNavigationController *_nav in _mainViewControllers ) {
         if ( _nav == nav ) continue;
         _nav.view.transform = transform;
+        [_nav _resetMaskView];
     }
 }
 
 @end
 
-@interface PYNavigationController ()
-
-@end
-
 @implementation PYNavigationController
 
+- (void)_resetMaskView
+{
+    [_maskView setAlpha:0.f];
+}
 @synthesize viewControllerType = _viewControllerType;
 - (void)setViewControllerType:(UINavigationControllerType)type
 {
@@ -209,7 +217,7 @@
 
 - (void)resetViewPosition
 {
-    if ( self.view.transform.tx == 0.f ) return;
+    if ( self.view.transform.tx == 0.f && _maskView.alpha == 0.f ) return;
     [UIView animateWithDuration:.175 animations:^{
         self.view.transform = CGAffineTransformIdentity;
         [[PYApperance sharedApperance]
