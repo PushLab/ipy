@@ -78,6 +78,14 @@
                     lineWidth:(CGFloat)lineWidth
                       padding:(CGFloat)padding;
 
+// Draw a cross(X) within specified size
++ (UIImage *)crossIconWithSize:(CGSize)imgSize;
++ (UIImage *)crossIconWithSize:(CGSize)imgSize
+               backgroundColor:(UIColor *)bkgClr
+                     iconColor:(UIColor *)icnClr
+                     lineWidth:(CGFloat)lineWidth
+                       padding:(CGFloat)padding;
+
 - (UIImage *)imageWithCornerRadius:(CGFloat)cornerRadius;
 
 @end

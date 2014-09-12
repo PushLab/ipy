@@ -531,6 +531,70 @@
     return _menuImage;
 }
 
+// Draw a cross(X) within specified size
++ (UIImage *)crossIconWithSize:(CGSize)imgSize
+{
+    return [UIImage crossIconWithSize:imgSize
+                      backgroundColor:[UIColor clearColor]
+                            iconColor:[UIColor colorWithString:@"#135AFF"]
+                            lineWidth:1.f
+                              padding:4.f];
+}
++ (UIImage *)crossIconWithSize:(CGSize)imgSize
+               backgroundColor:(UIColor *)bkgClr
+                     iconColor:(UIColor *)icnClr
+                     lineWidth:(CGFloat)lineWidth
+                       padding:(CGFloat)padding
+{
+    if ( lineWidth == 0 ) lineWidth = 1.f;
+    if ( bkgClr == nil ) bkgClr = [UIColor clearColor];
+    if ( icnClr == nil ) icnClr = [UIColor colorWithString:@"#135AFF"];
+    
+    if ( PYIsRetina ) {
+        UIGraphicsBeginImageContextWithOptions(imgSize, NO, [UIScreen mainScreen].scale);
+    } else {
+        UIGraphicsBeginImageContext(imgSize);
+    }
+    
+    // Create image context
+    CGContextRef _imgCtx = UIGraphicsGetCurrentContext();
+    
+    CGRect _drawRect = CGRectMake(0, 0, imgSize.width, imgSize.height);
+    
+    // Fill the background
+    CGContextSetFillColorWithColor(_imgCtx, bkgClr.CGColor);
+    CGContextFillRect(_imgCtx, _drawRect);
+    
+    CGRect _crossImgRect = CGRectInset(_drawRect, padding, padding);
+    
+    // Draw the cross image
+    CGContextSetLineWidth(_imgCtx, lineWidth);
+    CGContextSetLineCap(_imgCtx, kCGLineCapRound);
+    CGContextSetStrokeColorWithColor(_imgCtx, icnClr.CGColor);
+    
+    CGContextMoveToPoint(_imgCtx,
+                         _crossImgRect.origin.x,
+                         _crossImgRect.origin.y);
+    CGContextAddLineToPoint(_imgCtx,
+                            _crossImgRect.origin.x + _crossImgRect.size.width,
+                            _crossImgRect.origin.y + _crossImgRect.size.height);
+    CGContextMoveToPoint(_imgCtx,
+                         _crossImgRect.origin.x + _crossImgRect.size.width,
+                         _crossImgRect.origin.y);
+    CGContextAddLineToPoint(_imgCtx,
+                            _crossImgRect.origin.x,
+                            _crossImgRect.origin.y + _crossImgRect.size.height);
+    
+    CGContextStrokePath(_imgCtx);
+    
+    // Get the check image
+    UIImage *_crossImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return _crossImage;
+}
+
 - (UIImage *)imageWithCornerRadius:(CGFloat)cornerRadius
 {
     if ( PYIsRetina ) {

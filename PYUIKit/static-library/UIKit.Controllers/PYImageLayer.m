@@ -92,10 +92,15 @@ UIImage *PYUIBlurImage(UIImage *inputImage, CGFloat radius)
     CIContext *_ciContext = [CIContext contextWithOptions:nil];
     CGRect _outputRect = [_ciOutput extent];
     
-    _outputRect.origin.x += (_outputRect.size.width  - inputImage.size.width * inputImage.scale ) / 2;
-    _outputRect.origin.y += (_outputRect.size.height - inputImage.size.height * inputImage.scale ) / 2;
-    _outputRect.size = (CGSize){inputImage.size.width * inputImage.scale,
-        inputImage.size.height * inputImage.scale};
+    _outputRect.origin.x += ((_outputRect.size.width  -
+                              inputImage.size.width * inputImage.scale ) / 2 +
+                             radius);
+    _outputRect.origin.y += ((_outputRect.size.height -
+                              inputImage.size.height * inputImage.scale ) / 2 +
+                             radius);
+    _outputRect.size = ((CGSize){
+        inputImage.size.width * inputImage.scale - radius * 2,
+        inputImage.size.height * inputImage.scale - radius * 2});
     
     CGImageRef _cgImage = [_ciContext createCGImage:_ciOutput fromRect:_outputRect];
     UIImage *_resultImage = [UIImage imageWithCGImage:_cgImage];
