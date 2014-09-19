@@ -24,6 +24,7 @@
 
 #import "PYNavigationController.h"
 #import "PYApperance.h"
+#import "UIView+PYUIKit.h"
 
 
 @interface PYNavigationController ()
@@ -498,6 +499,7 @@
     if ( _pg.state == UIGestureRecognizerStateBegan ) {
         // Store the first point.
         _lastTouchPoint = _touchPoint;
+        [[self.visibleViewController.view findFirstResponsder] resignFirstResponder];
     } else if ( _pg.state == UIGestureRecognizerStateChanged ) {
         CGFloat _deltaHor = _touchPoint.x - _lastTouchPoint.x;
         if ( _deltaHor > 0 ) {
