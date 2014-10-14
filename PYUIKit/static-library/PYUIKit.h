@@ -44,6 +44,7 @@
 #import "PYTableManagerProtocol.h"
 #import "UITableManager.h"
 #import "PYTableManager.h"
+#import "PYButton.h"
 
 // Kernel
 #import "PYLayer.h"

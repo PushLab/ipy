@@ -33,6 +33,8 @@
 		E64A8FCE17BCA39D00B132BA /* PYTableView+Content.m in Sources */ = {isa = PBXBuildFile; fileRef = E64A8FCC17BCA39D00B132BA /* PYTableView+Content.m */; };
 		E64A8FD117BCAA9400B132BA /* PYTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E64A8FCF17BCAA9400B132BA /* PYTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E64A8FD217BCAA9400B132BA /* PYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E64A8FD017BCAA9400B132BA /* PYTableViewCell.m */; };
+		E66D22BD19E7DD5200820A83 /* PYButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E66D22BB19E7DD5200820A83 /* PYButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E66D22BE19E7DD5200820A83 /* PYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E66D22BC19E7DD5200820A83 /* PYButton.m */; };
 		E66E466A17A3847600D1FF55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6263F8315B42B1400DCF831 /* UIKit.framework */; };
 		E66E466B17A3847600D1FF55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6263F8515B42B1400DCF831 /* Foundation.framework */; };
 		E66E466C17A3847600D1FF55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6263F8715B42B1400DCF831 /* CoreGraphics.framework */; };
@@ -70,8 +72,6 @@
 		E66E46DE17A7216800D1FF55 /* UIView+PYUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E66E46DC17A7216800D1FF55 /* UIView+PYUIKit.m */; };
 		E66E46E117A721FA00D1FF55 /* PYView+Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = E66E46DF17A721FA00D1FF55 /* PYView+Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E66E46E217A721FA00D1FF55 /* PYView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = E66E46E017A721FA00D1FF55 /* PYView+Animation.m */; };
-		E67CE0D417A7E15B009BC886 /* PYButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E67CE0D217A7E15B009BC886 /* PYButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E67CE0D517A7E15B009BC886 /* PYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E67CE0D317A7E15B009BC886 /* PYButton.m */; };
 		E67CE0DA17A7E1A8009BC886 /* PYSwitcher.h in Headers */ = {isa = PBXBuildFile; fileRef = E67CE0D817A7E1A8009BC886 /* PYSwitcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E67CE0DB17A7E1A8009BC886 /* PYSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E67CE0D917A7E1A8009BC886 /* PYSwitcher.m */; };
 		E67CE0DF17A7E1B5009BC886 /* PYSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = E67CE0DD17A7E1B5009BC886 /* PYSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -180,6 +180,8 @@
 		E64A8FCC17BCA39D00B132BA /* PYTableView+Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYTableView+Content.m"; sourceTree = "<group>"; };
 		E64A8FCF17BCAA9400B132BA /* PYTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTableViewCell.h; sourceTree = "<group>"; };
 		E64A8FD017BCAA9400B132BA /* PYTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTableViewCell.m; sourceTree = "<group>"; };
+		E66D22BB19E7DD5200820A83 /* PYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYButton.h; sourceTree = "<group>"; };
+		E66D22BC19E7DD5200820A83 /* PYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYButton.m; sourceTree = "<group>"; };
 		E66E466917A3847600D1FF55 /* UIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E466F17A3847600D1FF55 /* UIKitDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIKitDemo-Info.plist"; sourceTree = "<group>"; };
 		E66E467117A3847600D1FF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -217,8 +219,6 @@
 		E66E46DC17A7216800D1FF55 /* UIView+PYUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PYUIKit.m"; sourceTree = "<group>"; };
 		E66E46DF17A721FA00D1FF55 /* PYView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PYView+Animation.h"; sourceTree = "<group>"; };
 		E66E46E017A721FA00D1FF55 /* PYView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PYView+Animation.m"; sourceTree = "<group>"; };
-		E67CE0D217A7E15B009BC886 /* PYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYButton.h; sourceTree = "<group>"; };
-		E67CE0D317A7E15B009BC886 /* PYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYButton.m; sourceTree = "<group>"; };
 		E67CE0D817A7E1A8009BC886 /* PYSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSwitcher.h; sourceTree = "<group>"; };
 		E67CE0D917A7E1A8009BC886 /* PYSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYSwitcher.m; sourceTree = "<group>"; };
 		E67CE0DD17A7E1B5009BC886 /* PYSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSlider.h; sourceTree = "<group>"; };
@@ -422,7 +422,6 @@
 				E64A8FAF17BB30C000B132BA /* HUDView */,
 				E67CE0E117A7E1B9009BC886 /* Scroll */,
 				E67CE0D717A7E19D009BC886 /* Switcher */,
-				E67CE0D617A7E15F009BC886 /* Button */,
 				E66E46E417A7A94D00D1FF55 /* Label */,
 				E66E46CE17A71F3300D1FF55 /* Rich.Text */,
 				E66E46E317A7A93200D1FF55 /* Image */,
@@ -469,15 +468,6 @@
 				E64A8FBF17BB7EA900B132BA /* PYBillBoard.m */,
 			);
 			name = Label;
-			sourceTree = "<group>";
-		};
-		E67CE0D617A7E15F009BC886 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-				E67CE0D217A7E15B009BC886 /* PYButton.h */,
-				E67CE0D317A7E15B009BC886 /* PYButton.m */,
-			);
-			name = Button;
 			sourceTree = "<group>";
 		};
 		E67CE0D717A7E19D009BC886 /* Switcher */ = {
@@ -559,6 +549,8 @@
 				E6D78286183369EE007FAF3F /* PYResource.m */,
 				E6F9150A183DAF1F00521E22 /* UIBarButtonItem+PYUIKit.h */,
 				E6F9150B183DAF1F00521E22 /* UIBarButtonItem+PYUIKit.m */,
+				E66D22BB19E7DD5200820A83 /* PYButton.h */,
+				E66D22BC19E7DD5200820A83 /* PYButton.m */,
 			);
 			path = UIKit.Utilities;
 			sourceTree = "<group>";
@@ -661,7 +653,6 @@
 				E66E46DD17A7216800D1FF55 /* UIView+PYUIKit.h in Headers */,
 				E64A8FBC17BB7DDC00B132BA /* PYAnimator.h in Headers */,
 				E66E46E117A721FA00D1FF55 /* PYView+Animation.h in Headers */,
-				E67CE0D417A7E15B009BC886 /* PYButton.h in Headers */,
 				E6C58D6517CB5486003D32EA /* UIViewController+PopUp.h in Headers */,
 				E67CE0DA17A7E1A8009BC886 /* PYSwitcher.h in Headers */,
 				E67CE0DF17A7E1B5009BC886 /* PYSlider.h in Headers */,
@@ -683,6 +674,7 @@
 				E6D782911835162E007FAF3F /* PYGridView.h in Headers */,
 				E64A8FB417BB30C000B132BA /* PYHUDView+Singleton.h in Headers */,
 				E69CC5C517B246EA00288631 /* PYScrollView+SideAnimation.h in Headers */,
+				E66D22BD19E7DD5200820A83 /* PYButton.h in Headers */,
 				E645A632193C841B008368B8 /* PYNavigationController.h in Headers */,
 				E66E46D517A71F7B00D1FF55 /* PYRichText+Label.h in Headers */,
 			);
@@ -829,8 +821,8 @@
 				E6F9150D183DAF1F00521E22 /* UIBarButtonItem+PYUIKit.m in Sources */,
 				E6D70DEF17BE735700542844 /* PYResponderGestureRecognizer.m in Sources */,
 				E66E46E217A721FA00D1FF55 /* PYView+Animation.m in Sources */,
-				E67CE0D517A7E15B009BC886 /* PYButton.m in Sources */,
 				E67CE0DB17A7E1A8009BC886 /* PYSwitcher.m in Sources */,
+				E66D22BE19E7DD5200820A83 /* PYButton.m in Sources */,
 				E6F914FD1839C68600521E22 /* PYGridItem+GridView.m in Sources */,
 				E67CE0E017A7E1B5009BC886 /* PYSlider.m in Sources */,
 				E6D782921835162E007FAF3F /* PYGridView.m in Sources */,
