@@ -38,6 +38,8 @@
     [self didChangeValueForKey:@"blurRadius"];
 }
 
+@synthesize originImage = _originImage;
+
 - (void)viewJustBeenCreated
 {
     // Default message

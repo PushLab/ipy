@@ -53,6 +53,9 @@
 // Set the image's blur radius
 @property (nonatomic, assign)   CGFloat             blurRadius;
 
+// Get the origin image without blur
+@property (nonatomic, readonly) UIImage             *originImage;
+
 // Start to load the image from the URL
 - (void)setImageUrl:(NSString *)imageUrl;
 - (void)setImageUrl:(NSString *)imageUrl done:(PYActionDone)done failed:(PYActionFailed)failed;

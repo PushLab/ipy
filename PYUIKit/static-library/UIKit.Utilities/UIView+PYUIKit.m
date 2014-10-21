@@ -49,11 +49,11 @@
 
 + (UIImage *)captureScreen
 {
-    CGSize _windowSize = [UIScreen mainScreen].applicationFrame.size;
+    CGSize _windowSize = [UIScreen mainScreen].bounds.size;
     UIGraphicsBeginImageContextWithOptions(_windowSize, NO, [UIScreen mainScreen].scale);
     if ( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
         [[UIApplication sharedApplication].keyWindow.rootViewController.view
-         drawViewHierarchyInRect:[UIScreen mainScreen].applicationFrame
+         drawViewHierarchyInRect:[UIScreen mainScreen].bounds
          afterScreenUpdates:YES];
     } else {
         [[UIApplication sharedApplication].keyWindow.rootViewController.view.layer
