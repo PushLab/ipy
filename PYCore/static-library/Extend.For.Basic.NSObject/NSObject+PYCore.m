@@ -109,23 +109,48 @@ do {                                                                    \
     
     Method _m = class_getInstanceMethod([self class], sel);
     if ( _m == NULL ) return nil;
+    struct objc_method_description *_mDesc = method_getDescription(_m);
+    if ( _mDesc == NULL ) return nil;
+    NSMethodSignature *_methodSig = [NSMethodSignature signatureWithObjCTypes:_mDesc->types];
+    NSInvocation *_invocation = [NSInvocation invocationWithMethodSignature:_methodSig];
+    NSInteger _argumentCount = [_methodSig numberOfArguments];
+    [_invocation setSelector:sel];
+    [_invocation setTarget:self];
     
-    _Pragma("clang diagnostic push")
-    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
-    id _r = [self performSelector:sel];
-    _Pragma("clang diagnostic pop")
+    __weak NSObject *_dump = self;
+    if ( _argumentCount > 2 ) {
+        for ( int i = 2; i < _argumentCount; ++i ) {
+            [_invocation setArgument:&_dump atIndex:i];
+        }
+    }
+    [_invocation retainArguments];
+    [_invocation invoke];
+
+    char _rType[32] = {0};
+    method_getReturnType(_m, _rType, 32);
+    if ( strcmp(_rType, "v") == 0 ) {
+        return nil;
+    }
     
-    return _r;
+    id _returnObject;
+    [_invocation getReturnValue:&_returnObject];
+    return _returnObject;
+    
+//    _Pragma("clang diagnostic push")
+//    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
+//    id _r = [self performSelector:sel];
+//    _Pragma("clang diagnostic pop")
+//    
+//    return _r;
     
 //    // Get the return type
-//    Method _m = class_getInstanceMethod([self class], sel);
-//    if ( _m == NULL ) return nil;
+//    id (*__msg_send)(id, SEL) = (id (*)(id, SEL))objc_msgSend;
 //    char _rType[32] = {0};
 //    method_getReturnType(_m, _rType, 32);
 //    if ( strcmp(_rType, "v") == 0 ) {
-//        objc_msgSend(self, sel, self, self);
+//        __msg_send(self, sel);
 //    } else {
-//        return objc_msgSend(self, sel, self, self);
+//        return __msg_send(self, sel);
 //    }
 //    return nil;
 }
@@ -136,23 +161,50 @@ do {                                                                    \
     
     Method _m = class_getInstanceMethod([self class], sel);
     if ( _m == NULL ) return nil;
+    struct objc_method_description *_mDesc = method_getDescription(_m);
+    if ( _mDesc == NULL ) return nil;
+    NSMethodSignature *_methodSig = [NSMethodSignature signatureWithObjCTypes:_mDesc->types];
+    NSInvocation *_invocation = [NSInvocation invocationWithMethodSignature:_methodSig];
+    NSInteger _argumentCount = [_methodSig numberOfArguments];
+    [_invocation setSelector:sel];
+    [_invocation setTarget:self];
+    
+    [_invocation setArgument:&object atIndex:2];
+    
+    __weak NSObject *_dump = self;
+    if ( _argumentCount > 3 ) {
+        for ( int i = 3; i < _argumentCount; ++i ) {
+            [_invocation setArgument:&_dump atIndex:i];
+        }
+    }
+    [_invocation retainArguments];
+    [_invocation invoke];
+    
+    char _rType[32] = {0};
+    method_getReturnType(_m, _rType, 32);
+    if ( strcmp(_rType, "v") == 0 ) {
+        return nil;
+    }
+    
+    id _returnObject;
+    [_invocation getReturnValue:&_returnObject];
+    return _returnObject;
 
-    _Pragma("clang diagnostic push")
-    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
-    id _r = [self performSelector:sel withObject:object];
-    _Pragma("clang diagnostic pop")
-
-    return _r;
+//    _Pragma("clang diagnostic push")
+//    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
+//    id _r = [self performSelector:sel withObject:object];
+//    _Pragma("clang diagnostic pop")
+//
+//    return _r;
 
 //    // Get the return type
-//    Method _m = class_getInstanceMethod([self class], sel);
-//    if ( _m == NULL ) return nil;
+//    id (*__msg_send)(id, SEL, id) = (id (*)(id, SEL, id))objc_msgSend;
 //    char _rType[32] = {0};
 //    method_getReturnType(_m, _rType, 32);
 //    if ( strcmp(_rType, "v") == 0 ) {
-//        objc_msgSend(self, sel, object, self);
+//        __msg_send(self, sel, object);
 //    } else {
-//        return objc_msgSend(self, sel, object, self);
+//        return __msg_send(self, sel, object);
 //    }
 //    return nil;
 }
@@ -163,23 +215,51 @@ do {                                                                    \
     
     Method _m = class_getInstanceMethod([self class], sel);
     if ( _m == NULL ) return nil;
+    
+    struct objc_method_description *_mDesc = method_getDescription(_m);
+    if ( _mDesc == NULL ) return nil;
+    NSMethodSignature *_methodSig = [NSMethodSignature signatureWithObjCTypes:_mDesc->types];
+    NSInvocation *_invocation = [NSInvocation invocationWithMethodSignature:_methodSig];
+    NSInteger _argumentCount = [_methodSig numberOfArguments];
+    [_invocation setSelector:sel];
+    [_invocation setTarget:self];
+    [_invocation setArgument:&obj1 atIndex:2];
+    [_invocation setArgument:&obj2 atIndex:3];
+    
+    __weak NSObject *_dump = self;
+    if ( _argumentCount > 4 ) {
+        for ( int i = 4; i < _argumentCount; ++i ) {
+            [_invocation setArgument:&_dump atIndex:i];
+        }
+    }
+    [_invocation retainArguments];
+    [_invocation invoke];
+    
+    char _rType[32] = {0};
+    method_getReturnType(_m, _rType, 32);
+    if ( strcmp(_rType, "v") == 0 ) {
+        return nil;
+    }
+    
+    id _returnObject;
+    [_invocation getReturnValue:&_returnObject];
+    return _returnObject;
 
-    _Pragma("clang diagnostic push")
-    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
-    id _r = [self performSelector:sel withObject:obj1 withObject:obj2];
-    _Pragma("clang diagnostic pop")
-
-    return _r;
+//    _Pragma("clang diagnostic push")
+//    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")
+//    id _r = [self performSelector:sel withObject:obj1 withObject:obj2];
+//    _Pragma("clang diagnostic pop")
+//
+//    return _r;
 
 //    // Get the return type
-//    Method _m = class_getInstanceMethod([self class], sel);
-//    if ( _m == NULL ) return nil;
+//    id (*__msg_send)(id, SEL, id, id) = (id (*)(id, SEL, id, id))objc_msgSend;
 //    char _rType[32] = {0};
 //    method_getReturnType(_m, _rType, 32);
 //    if ( strcmp(_rType, "v") == 0 ) {
-//        objc_msgSend(self, sel, obj1, obj2);
+//        __msg_send(self, sel, obj1, obj2);
 //    } else {
-//        return objc_msgSend(self, sel, obj1, obj2);
+//        return __msg_send(self, sel, obj1, obj2);
 //    }
 //    return nil;
 }
