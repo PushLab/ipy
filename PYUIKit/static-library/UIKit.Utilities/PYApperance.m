@@ -174,6 +174,12 @@ PYSingletonDefaultImplementation;
             [_nc setViewControllerType:UINavigationControllerTypeMainView];
             [_nc setMaxToLeftMovingSpace:_rightMenuDisplayWidth];
             [_nc setMaxToRightMovingSpace:_leftMenuDisplayWidth];
+            
+            [_nc.view.layer setShadowRadius:2.f];
+            [_nc.view.layer setShadowOffset:CGSizeMake(0, 0)];
+            [_nc.view.layer setShadowColor:[UIColor blackColor].CGColor];
+            [_nc.view.layer setShadowOpacity:.75];
+            [_nc.view.layer setShadowPath:[UIBezierPath bezierPathWithRect:_nc.view.bounds].CGPath];
         
             [_rootContainer addChildViewController:_nc];
             [_rootContainer.view addSubview:_nc.view];
