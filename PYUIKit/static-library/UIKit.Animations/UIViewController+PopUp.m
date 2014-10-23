@@ -429,6 +429,11 @@
     }
     [_maskView setAlpha:0.f];
     
+    UITapGestureRecognizer *_tapGesture = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self
+                                           action:@selector(_action_maskView_tap_handler:)];
+    [_maskView addGestureRecognizer:_tapGesture];
+    
     CGFloat _animationTime = .3 / 2;
     if ( type == PYPopUpAnimationTypeJelly ) {
         _animationTime = .3 / 1.5 + .3 / 2 + .3 / 2;
@@ -436,6 +441,11 @@
     [UIView animateWithDuration:_animationTime animations:^{
         [_maskView setAlpha:alpha];
     }];
+}
+
+- (void)_action_maskView_tap_handler:(id)sender
+{
+    [self dismissChildPoppedView];
 }
 
 - (void)hideMaskView:(PYPopUpAnimationType)type
