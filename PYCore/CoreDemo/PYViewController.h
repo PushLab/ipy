@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PYCore.h"
 
 @interface PYViewController : UIViewController
+{
+    PYKVOObject *_kvo_obj;
+    UIView *_subview1;
+}
 
 @end
