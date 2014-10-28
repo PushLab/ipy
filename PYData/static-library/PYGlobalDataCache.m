@@ -219,6 +219,7 @@ static NSMutableDictionary		*_gdcDict;
         if ( [_innerDb containsKey:key] ) {
             // delete
             [_innerDb deleteValueForKey:key];
+            _allObjectCount -= 1;
         }
     }
 
