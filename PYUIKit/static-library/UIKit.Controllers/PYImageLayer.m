@@ -206,6 +206,7 @@ UIImage *PYUIBlurImage(UIImage *inputImage, CGFloat radius)
     //@synchronized(self) {
     if ( [imageUrl length] == 0 ) {
         // Clean self's status
+        _loadingUrl = @"";
         self.image = nil;
         return;
     }

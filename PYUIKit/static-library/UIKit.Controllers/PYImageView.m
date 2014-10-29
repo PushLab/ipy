@@ -285,6 +285,7 @@
 {
     if ( [imageUrl length] == 0 ) {
         // Clean self's status
+        _loadingUrl = @"";
         self.image = _placeholdImage;
         return;
     }
