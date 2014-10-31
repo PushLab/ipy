@@ -39,6 +39,13 @@ NSString *const         kUIViewControllerPopState       = @"popState";
 @end
 
 static PYApperance *_gPYApperance = nil;
+
+@interface PYApperance ()
+{
+    NSUInteger              _topNavIndex;
+}
+@end
+
 // KVO Extend
 @interface PYApperance (KVOExtend)
 // Observer the [popState] of _rootContainer.
@@ -75,6 +82,8 @@ PYSingletonDefaultImplementation;
         
         _leftMenuDisplayWidth = 0.f;
         _rightMenuDisplayWidth = 0.f;
+        
+        _topNavIndex = 0;
     }
     return self;
 }
@@ -97,6 +106,7 @@ PYSingletonDefaultImplementation;
     [[_nav topViewController] viewWillAppear:NO];
     //[_nav viewWillAppear:NO];
     [_nav resetViewPosition];
+    _topNavIndex = index;
 }
 
 @synthesize leftMenuDisplayWidth = _leftMenuDisplayWidth;
@@ -229,7 +239,7 @@ PYSingletonDefaultImplementation;
             return [_popedController visibleViewController];
         }
         if ( [_mainViewControllers count] == 0 ) return nil;
-        PYNavigationController *_mainNC = [_mainViewControllers lastObject];
+        PYNavigationController *_mainNC = [_mainViewControllers safeObjectAtIndex:_topNavIndex];
         return _mainNC.visibleViewController;
     }
 }
