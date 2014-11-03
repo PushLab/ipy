@@ -42,6 +42,7 @@
 #import "PYEncoder.h"
 #import "PYMutex.h"
 #import "PYSemaphore.h"
+#import "PYRandom.h"
 
 // Utility
 #import "PYKernel.h"
