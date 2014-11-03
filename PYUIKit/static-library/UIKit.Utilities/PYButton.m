@@ -26,6 +26,10 @@
    forControlEvents:UIControlEventTouchUpOutside];
     [self addTarget:self action:@selector(actionOnTouchUp:)
    forControlEvents:UIControlEventTouchDragOutside];
+    [self addTarget:self action:@selector(actionOnTouchUp:)
+   forControlEvents:UIControlEventTouchDragExit];
+    [self addTarget:self action:@selector(actionOnTouchUp:)
+   forControlEvents:UIControlEventTouchCancel];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -63,6 +67,9 @@
 - (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state
 {
     _cachedBackgroundColor[state] = backgroundColor;
+    if ( state == self.state ) {
+        [super setBackgroundColor:backgroundColor];
+    }
 }
 
 - (void)setSelected:(BOOL)selected
