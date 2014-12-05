@@ -167,12 +167,12 @@ PYSingletonDefaultImplementation
             if ( _isDebug ) {
                 BEGIN_MAINTHREAD_INVOKE
                 if ( [[_urlReq.HTTPMethod lowercaseString] isEqualToString:@"post"] ) {
-                    PYLog(@"{\nRequest URL: %@\nMethod: POST\nBody: %@\n}",
-                          _urlReq.URL.absoluteString,
-                          _urlReq.HTTPBody);
+                    ALog(@"{\nRequest URL: %@\nMethod: POST\nBody: %@\n}",
+                         _urlReq.URL.absoluteString,
+                         _urlReq.HTTPBody);
                 } else {
-                    PYLog(@"{\nRequest URL: %@\nMethod: GET\n}",
-                          _urlReq.URL.absoluteString);
+                    ALog(@"{\nRequest URL: %@\nMethod: GET\n}",
+                         _urlReq.URL.absoluteString);
                 }
                 END_MAINTHREAD_INVOKE
             }
@@ -188,7 +188,7 @@ PYSingletonDefaultImplementation
                 // Server error
                 BEGIN_MAINTHREAD_INVOKE
                 if ( _isDebug ) {
-                    PYLog(@"Request Failed: %d", (int)_response.statusCode);
+                    ALog(@"Request Failed: %d", (int)_response.statusCode);
                 }
                 if ( failed ) failed( [PYApiManager apiErrorWithCode:PYApiErrorInvalidateHttpStatus] );
                 END_MAINTHREAD_INVOKE
@@ -221,7 +221,7 @@ PYSingletonDefaultImplementation
             if ( _isDebug ) {
                 NSString *_sBody = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
                 BEGIN_MAINTHREAD_INVOKE
-                PYLog(@"Response: \n%@", _sBody);
+                ALog(@"Response: \n%@", _sBody);
                 END_MAINTHREAD_INVOKE
             }
 
