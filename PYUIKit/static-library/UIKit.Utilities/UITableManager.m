@@ -64,6 +64,10 @@ PYKVO_CHANGED_RESPONSE(_bindTableView, frame);
     [UITableManager registerEvent(UITableManagerEventCanDeleteCell)];
     [UITableManager registerEvent(UITableManagerEventGetCellClass)];
     [UITableManager registerEvent(UITableManagerEventGetSectionTitle)];
+    [UITableManager registerEvent(UITableManagerEventGetSectionFooter)];
+    [UITableManager registerEvent(UITableManagerEventGetSectionFooterTitle)];
+    [UITableManager registerEvent(UITableManagerEventGetSectionHeaderTitle)];
+    [UITableManager registerEvent(UITableManagerEventGetHeightOfSectionFooter)];
 }
 
 - (Class)classOfCellAtIndex:(NSIndexPath *)index
@@ -100,6 +104,9 @@ PYKVO_CHANGED_RESPONSE(_bindTableView, frame);
 @dynamic isShowSectionHeader;
 - (BOOL)isShowSectionHeader { return _flags._isShowSectionHeader; }
 - (void)setIsShowSectionHeader:(BOOL)isShowSectionHeader { _flags._isShowSectionHeader = isShowSectionHeader; }
+@dynamic isShowSectionFooter;
+- (BOOL)isShowSectionFooter { return _flags._isShowSectionFooter; }
+- (void)setIsShowSectionFooter:(BOOL)isShowSectionFooter { _flags._isShowSectionFooter = isShowSectionFooter; }
 
 @dynamic isMultiSection;
 - (BOOL)isMultiSection { return _flags._sectionCount > 1; }
@@ -411,14 +418,41 @@ withMultipleSectionDataSource:(NSArray *)datasource
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if ( _flags._isShowSectionHeader == NO ) return nil;
-    return [self invokeTargetWithEvent:UITableManagerEventGetSectionTitle
-                                exInfo:@(section)];
+    NSString *_title = [self invokeTargetWithEvent:UITableManagerEventGetSectionTitle
+                                            exInfo:@(section)];
+    if ( [_title length] == 0 ) {
+        _title = [self invokeTargetWithEvent:UITableManagerEventGetSectionHeaderTitle
+                                      exInfo:@(section)];
+    }
+    return _title;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if ( _flags._isShowSectionFooter == NO ) return nil;
+    return [self invokeTargetWithEvent:UITableManagerEventGetSectionFooter
+                                exInfo:PYIntToObject(section)];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if ( _flags._isShowSectionFooter == NO ) return nil;
+    return [self invokeTargetWithEvent:UITableManagerEventGetSectionFooterTitle
+                                exInfo:PYIntToObject(section)];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if ( _flags._isShowSectionHeader == NO ) return 0;
     NSNumber *_result = [self invokeTargetWithEvent:UITableManagerEventGetHeightOfSectionHeader
+                                             exInfo:PYIntToObject(section)];
+    if ( _result == nil ) return 32.f;
+    return [_result floatValue];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if ( _flags._isShowSectionFooter == NO ) return 0;
+    NSNumber *_result = [self invokeTargetWithEvent:UITableManagerEventGetHeightOfSectionFooter
                                              exInfo:PYIntToObject(section)];
     if ( _result == nil ) return 32.f;
     return [_result floatValue];

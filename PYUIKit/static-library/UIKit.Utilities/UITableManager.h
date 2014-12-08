@@ -42,6 +42,10 @@ typedef NS_OPTIONS(NSUInteger, UITableManagerEvent) {
     UITableManagerEventCanDeleteCell            = PYTableManagerEventUserDefined + 14,
     UITableManagerEventGetCellClass             = PYTableManagerEventGetCellClass,
     UITableManagerEventGetSectionTitle          = PYTableManagerEventUserDefined + 16,
+    UITableManagerEventGetSectionFooter         = PYTableManagerEventUserDefined + 17,
+    UITableManagerEventGetSectionFooterTitle    = PYTableManagerEventUserDefined + 18,
+    UITableManagerEventGetSectionHeaderTitle    = PYTableManagerEventUserDefined + 19,
+    UITableManagerEventGetHeightOfSectionFooter = PYTableManagerEventUserDefined + 20,
 };
 
 @interface UITableManager : PYActionDispatcher
@@ -56,6 +60,7 @@ typedef NS_OPTIONS(NSUInteger, UITableManagerEvent) {
         //NSInteger               _cellClassCount;
         NSUInteger              _sectionCount;
         BOOL                    _isShowSectionHeader:1; // if show section header.
+        BOOL                    _isShowSectionFooter:1; // if show section footer.
         BOOL                    _isEditing:1;           // is current table view in editing mode
         BOOL                    _isShowSectionIndexTitle:1; // if show section index title
         BOOL                    _isUpdating:1;          // is updating content data source
@@ -87,6 +92,7 @@ typedef NS_OPTIONS(NSUInteger, UITableManagerEvent) {
 // Get the section count
 @property (nonatomic, readonly) NSUInteger      sectionCount;
 @property (nonatomic, assign)   BOOL            isShowSectionHeader;
+@property (nonatomic, assign)   BOOL            isShowSectionFooter;
 
 // If current data source is multiple section
 @property (nonatomic, readonly) BOOL            isMultiSection;
