@@ -103,6 +103,8 @@
 		E6BC1BEA17A023C300D480E2 /* PYResponderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1BE817A023C300D480E2 /* PYResponderView.m */; };
 		E6C58D6517CB5486003D32EA /* UIViewController+PopUp.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C58D6317CB5486003D32EA /* UIViewController+PopUp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6C58D6617CB5486003D32EA /* UIViewController+PopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C58D6417CB5486003D32EA /* UIViewController+PopUp.m */; };
+		E6CB7E481A4D3FDE0044521C /* UIScrollView+PYUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E6CB7E461A4D3FDE0044521C /* UIScrollView+PYUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6CB7E491A4D3FDE0044521C /* UIScrollView+PYUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6CB7E471A4D3FDE0044521C /* UIScrollView+PYUIKit.m */; };
 		E6D57F3E15F5A8C400C1ED25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6263F8515B42B1400DCF831 /* Foundation.framework */; };
 		E6D70DEE17BE735700542844 /* PYResponderGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D70DEC17BE735700542844 /* PYResponderGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D70DEF17BE735700542844 /* PYResponderGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D70DED17BE735700542844 /* PYResponderGestureRecognizer.m */; };
@@ -250,6 +252,8 @@
 		E6BC1BE817A023C300D480E2 /* PYResponderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYResponderView.m; sourceTree = "<group>"; };
 		E6C58D6317CB5486003D32EA /* UIViewController+PopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PopUp.h"; sourceTree = "<group>"; };
 		E6C58D6417CB5486003D32EA /* UIViewController+PopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PopUp.m"; sourceTree = "<group>"; };
+		E6CB7E461A4D3FDE0044521C /* UIScrollView+PYUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PYUIKit.h"; sourceTree = "<group>"; };
+		E6CB7E471A4D3FDE0044521C /* UIScrollView+PYUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PYUIKit.m"; sourceTree = "<group>"; };
 		E6D57F3D15F5A8C400C1ED25 /* libPYUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPYUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D57F4115F5A8C400C1ED25 /* PYUIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYUIKit-Prefix.pch"; sourceTree = "<group>"; };
 		E6D70DEC17BE735700542844 /* PYResponderGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYResponderGestureRecognizer.h; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 				E6F9150B183DAF1F00521E22 /* UIBarButtonItem+PYUIKit.m */,
 				E66D22BB19E7DD5200820A83 /* PYButton.h */,
 				E66D22BC19E7DD5200820A83 /* PYButton.m */,
+				E6CB7E461A4D3FDE0044521C /* UIScrollView+PYUIKit.h */,
+				E6CB7E471A4D3FDE0044521C /* UIScrollView+PYUIKit.m */,
 			);
 			path = UIKit.Utilities;
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 				E64A8FC017BB7EA900B132BA /* PYBillBoard.h in Headers */,
 				E66E46D117A71F5D00D1FF55 /* PYRichText.h in Headers */,
 				E64A8FD117BCAA9400B132BA /* PYTableViewCell.h in Headers */,
+				E6CB7E481A4D3FDE0044521C /* UIScrollView+PYUIKit.h in Headers */,
 				E66E46D917A71F8A00D1FF55 /* PYRichLabel.h in Headers */,
 				E64A8FB617BB30C000B132BA /* PYHUDView.h in Headers */,
 				E66E46DD17A7216800D1FF55 /* UIView+PYUIKit.h in Headers */,
@@ -818,6 +825,7 @@
 				E66E46DE17A7216800D1FF55 /* UIView+PYUIKit.m in Sources */,
 				E64A8FD217BCAA9400B132BA /* PYTableViewCell.m in Sources */,
 				E64A8FB717BB30C000B132BA /* PYHUDView.m in Sources */,
+				E6CB7E491A4D3FDE0044521C /* UIScrollView+PYUIKit.m in Sources */,
 				E6F9150D183DAF1F00521E22 /* UIBarButtonItem+PYUIKit.m in Sources */,
 				E6D70DEF17BE735700542844 /* PYResponderGestureRecognizer.m in Sources */,
 				E66E46E217A721FA00D1FF55 /* PYView+Animation.m in Sources */,
