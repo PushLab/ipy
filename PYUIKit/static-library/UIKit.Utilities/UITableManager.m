@@ -735,7 +735,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)appendNewDataToEOL:(NSArray *)dataArray scrollToBottom:(BOOL)scrollToBottom
 {
     if ( [dataArray count] == 0 ) return;
-    [_bindTableView beginUpdates];
+    // [_bindTableView beginUpdates];
     if ( _flags._isMultipleSection ) {
         NSArray *_lastSection = [_contentDataSource lastObject];
         NSMutableArray *_sectionArray = [NSMutableArray arrayWithArray:_lastSection];
@@ -745,15 +745,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     } else {
         [_contentDataSource addObjectsFromArray:dataArray];
     }
-    [_bindTableView endUpdates];
+    // [_bindTableView endUpdates];
+    [self reloadTableData];
     if ( scrollToBottom == NO ) return;
     
     NSIndexPath *_lastIndexPath = nil;
     if ( _flags._isMultipleSection ) {
         NSArray *_lastSection = [_contentDataSource lastObject];
-        _lastIndexPath = [NSIndexPath indexPathForRow:_lastSection.count inSection:_contentDataSource.count];
+        _lastIndexPath = [NSIndexPath indexPathForRow:_lastSection.count - 1 inSection:_contentDataSource.count];
     } else {
-        _lastIndexPath = [NSIndexPath indexPathForRow:_contentDataSource.count inSection:0];
+        _lastIndexPath = [NSIndexPath indexPathForRow:_contentDataSource.count - 1 inSection:0];
     }
     [_bindTableView
      scrollToRowAtIndexPath:_lastIndexPath
@@ -765,7 +766,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( [dataArray count] == 0 ) return;
     
-    [_bindTableView beginUpdates];
+    //[_bindTableView beginUpdates];
     if ( _flags._isMultipleSection ) {
         NSArray *_firstSection = [_contentDataSource objectAtIndex:0];
         NSMutableArray *_sectionArray = [NSMutableArray arrayWithArray:_firstSection];
@@ -781,7 +782,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             [_contentDataSource insertObject:dataArray[_count] atIndex:0];
         }
     }
-    [_bindTableView endUpdates];
+    //[_bindTableView endUpdates];
+    [self reloadTableData];
     if ( scrollToTop == NO ) return;
     
     NSIndexPath *_firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];

@@ -126,6 +126,11 @@
                                                  _displaySize.height)
                              animated:YES];
         }
+    } else if ( [self isKindOfClass:[UITableView class]] && _ == nil ) {
+        // Scroll to bottom
+        [self scrollRectToVisible:CGRectMake(0, self.contentSize.height - _displaySize.height,
+                                             _displaySize.width, _displaySize.height)
+                         animated:YES];
     }
     // Store
     [self.layer setValue:_keyboardToFrame forKey:@"__k__keyboard_lastframe"];
