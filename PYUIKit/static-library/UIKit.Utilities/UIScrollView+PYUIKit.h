@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, UIScrollViewKeyboardTriggerMode) {
+    UIScrollViewKeyboardTriggerContentScale,
+    UIScrollViewKeyboardTriggerContentOffset
+};
+
 @interface UIScrollView (PYUIKit)
+
+// Keyboard trigger mode, default is UIScrollViewKeyboardTriggerContentScale
+@property (nonatomic, assign)   UIScrollViewKeyboardTriggerMode keyboardTriggerMode;
 
 - (void)setTriggerKeyboardEvent:(BOOL)enable;
 

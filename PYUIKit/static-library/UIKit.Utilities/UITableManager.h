@@ -48,30 +48,7 @@ typedef NS_OPTIONS(NSUInteger, UITableManagerEvent) {
     UITableManagerEventGetHeightOfSectionFooter = PYTableManagerEventUserDefined + 20,
 };
 
-@interface UITableManager : PYActionDispatcher
-    <PYTableManagerProtocol, UITableViewDataSource, UITableViewDelegate>
-{
-    UITableView             *_bindTableView;
-    NSArray                 *_contentDataSource;
-    UIView                  *_pullDownContainerView;
-    UIView                  *_pullUpContainerView;
-    
-    struct {
-        //NSInteger               _cellClassCount;
-        NSUInteger              _sectionCount;
-        BOOL                    _isShowSectionHeader:1; // if show section header.
-        BOOL                    _isShowSectionFooter:1; // if show section footer.
-        BOOL                    _isEditing:1;           // is current table view in editing mode
-        BOOL                    _isShowSectionIndexTitle:1; // if show section index title
-        BOOL                    _isUpdating:1;          // is updating content data source
-        BOOL                    _canUpdateContent:1;    // can update the data source
-        BOOL                    _isMultipleSection:1;   // the datasource is a 2D array
-    }                       _flags;
-    
-    // Cell class specified
-    Class                   _defaultCellClass;
-    NSMutableDictionary     *_cellClassForSection;
-}
+@interface UITableManager : PYActionDispatcher<PYTableManagerProtocol>
 
 // The cell class
 - (Class)classOfCellAtIndex:(NSIndexPath *)index;
@@ -126,6 +103,12 @@ withMultipleSectionDataSource:(NSArray *)datasource
 // Finish Updating Content
 - (void)finishUpdateContent;
 - (void)cancelUpdateContent;
+
+// Append new data to the end of list
+- (void)appendNewDataToEOL:(NSArray *)dataArray scrollToBottom:(BOOL)scrollToBottom;
+
+// Insert new data to the top of list
+- (void)insertNewDataToTOL:(NSArray *)dataArray scrollToTop:(BOOL)scrollToTop;
 
 @end
 

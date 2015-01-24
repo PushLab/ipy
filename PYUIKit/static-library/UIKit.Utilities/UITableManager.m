@@ -26,6 +26,32 @@
 #import "PYTableCell.h"
 #import "PYLayer.h"
 
+@interface UITableManager ()<UITableViewDataSource, UITableViewDelegate>
+{
+    UITableView             *_bindTableView;
+    NSMutableArray          *_contentDataSource;
+    UIView                  *_pullDownContainerView;
+    UIView                  *_pullUpContainerView;
+    
+    struct {
+        //NSInteger               _cellClassCount;
+        NSUInteger              _sectionCount;
+        BOOL                    _isShowSectionHeader:1; // if show section header.
+        BOOL                    _isShowSectionFooter:1; // if show section footer.
+        BOOL                    _isEditing:1;           // is current table view in editing mode
+        BOOL                    _isShowSectionIndexTitle:1; // if show section index title
+        BOOL                    _isUpdating:1;          // is updating content data source
+        BOOL                    _canUpdateContent:1;    // can update the data source
+        BOOL                    _isMultipleSection:1;   // the datasource is a 2D array
+    }                       _flags;
+    
+    // Cell class specified
+    Class                   _defaultCellClass;
+    NSMutableDictionary     *_cellClassForSection;
+}
+
+@end
+
 @interface UITableManager (KVOExtend)
 PYKVO_CHANGED_RESPONSE(_bindTableView, frame);
 @end
@@ -286,10 +312,10 @@ withMultipleSectionDataSource:(NSArray *)datasource
 
         if ( dataSource == nil ) {
             // We load en empty data source.
-            _contentDataSource = [NSArray array];
+            _contentDataSource = [NSMutableArray array];
         } else {
             // Copy the data source.
-            _contentDataSource = [NSArray arrayWithArray:dataSource];
+            _contentDataSource = [NSMutableArray arrayWithArray:dataSource];
         }
         _bindTableView = tableView;
         _bindTableView.delegate = self;
@@ -347,10 +373,10 @@ withMultipleSectionDataSource:(NSArray *)datasource
     @synchronized( self ) {
         if ( dataSource == nil ) {
             // We load en empty data source.
-            _contentDataSource = [NSArray array];
+            _contentDataSource = [NSMutableArray array];
         } else {
             // Copy the data source.
-            _contentDataSource = [NSArray arrayWithArray:dataSource];
+            _contentDataSource = [NSMutableArray arrayWithArray:dataSource];
         }
         
         _flags._sectionCount = count;
@@ -561,18 +587,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id _cell = [tableView cellForRowAtIndexPath:indexPath];
     [self invokeTargetWithEvent:PYTableManagerEventDeleteCell exInfo:_cell exInfo:indexPath];
-    NSMutableArray *_copiedDS = [NSMutableArray arrayWithArray:_contentDataSource];
     if ( _flags._isMultipleSection ) {
         NSMutableArray *_sectionSource =
         [NSMutableArray arrayWithArray:
-         [_copiedDS safeObjectAtIndex:indexPath.section]];
+         [_contentDataSource safeObjectAtIndex:indexPath.section]];
         [_sectionSource removeObjectAtIndex:indexPath.row];
-        [_copiedDS removeObjectAtIndex:indexPath.section];
-        [_copiedDS insertObject:_sectionSource atIndex:indexPath.section];
+        [_contentDataSource removeObjectAtIndex:indexPath.section];
+        [_contentDataSource insertObject:_sectionSource atIndex:indexPath.section];
     } else {
-        [_copiedDS removeObjectAtIndex:indexPath.row];
+        [_contentDataSource removeObjectAtIndex:indexPath.row];
     }
-    _contentDataSource = _copiedDS;
     [_bindTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -687,9 +711,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)_deleteBlockInvoked:(id)cell indexPath:(NSIndexPath *)indexPath
 {
     [self invokeTargetWithEvent:PYTableManagerEventDeleteCell exInfo:cell exInfo:indexPath];
-    NSMutableArray *_copiedDS = [NSMutableArray arrayWithArray:_contentDataSource];
-    [_copiedDS removeObjectAtIndex:indexPath.row];
-    _contentDataSource = _copiedDS;
+    [_contentDataSource removeObjectAtIndex:indexPath.row];
     [_bindTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -708,6 +730,65 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         _flags._isUpdating = NO;
         [self invokeTargetWithEvent:UITableManagerEventCancelUpdating];
     }
+}
+
+- (void)appendNewDataToEOL:(NSArray *)dataArray scrollToBottom:(BOOL)scrollToBottom
+{
+    if ( [dataArray count] == 0 ) return;
+    [_bindTableView beginUpdates];
+    if ( _flags._isMultipleSection ) {
+        NSArray *_lastSection = [_contentDataSource lastObject];
+        NSMutableArray *_sectionArray = [NSMutableArray arrayWithArray:_lastSection];
+        [_sectionArray addObjectsFromArray:dataArray];
+        [_contentDataSource removeLastObject];
+        [_contentDataSource addObject:_sectionArray];
+    } else {
+        [_contentDataSource addObjectsFromArray:dataArray];
+    }
+    [_bindTableView endUpdates];
+    if ( scrollToBottom == NO ) return;
+    
+    NSIndexPath *_lastIndexPath = nil;
+    if ( _flags._isMultipleSection ) {
+        NSArray *_lastSection = [_contentDataSource lastObject];
+        _lastIndexPath = [NSIndexPath indexPathForRow:_lastSection.count inSection:_contentDataSource.count];
+    } else {
+        _lastIndexPath = [NSIndexPath indexPathForRow:_contentDataSource.count inSection:0];
+    }
+    [_bindTableView
+     scrollToRowAtIndexPath:_lastIndexPath
+     atScrollPosition:UITableViewScrollPositionBottom
+     animated:YES];
+}
+
+- (void)insertNewDataToTOL:(NSArray *)dataArray scrollToTop:(BOOL)scrollToTop
+{
+    if ( [dataArray count] == 0 ) return;
+    
+    [_bindTableView beginUpdates];
+    if ( _flags._isMultipleSection ) {
+        NSArray *_firstSection = [_contentDataSource objectAtIndex:0];
+        NSMutableArray *_sectionArray = [NSMutableArray arrayWithArray:_firstSection];
+        NSInteger _count = dataArray.count - 1;
+        for ( ; _count >= 0; --_count ) {
+            [_sectionArray insertObject:dataArray[_count] atIndex:0];
+        }
+        [_contentDataSource removeObjectAtIndex:0];
+        [_contentDataSource insertObject:_sectionArray atIndex:0];
+    } else {
+        NSInteger _count = dataArray.count - 1;
+        for ( ; _count >= 0; --_count ) {
+            [_contentDataSource insertObject:dataArray[_count] atIndex:0];
+        }
+    }
+    [_bindTableView endUpdates];
+    if ( scrollToTop == NO ) return;
+    
+    NSIndexPath *_firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [_bindTableView
+     scrollToRowAtIndexPath:_firstIndexPath
+     atScrollPosition:UITableViewScrollPositionTop
+     animated:YES];
 }
 
 @end
