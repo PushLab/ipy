@@ -7,6 +7,24 @@
 //
 
 /*
+ LGPL V3 Lisence
+ This file is part of cleandns.
+ 
+ PYNetwork is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ PYData is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with cleandns.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
  LISENCE FOR IPY
  COPYRIGHT (c) 2013, Push Chen.
  ALL RIGHTS RESERVED.
@@ -22,7 +40,14 @@
  ENJOY YOUR LIFE AND BE FAR AWAY FROM BUGS.
  */
 
+/*
+ PYNetwork is an API manager library for iOS Applications.
+ This library is an extend for PYCore and PYData.
+ *Important*: Must link with PYCore.framework and PYData.framework
+ */
+
 #import "PYApiManager.h"
+#import <PYData/PYData.h>
 
 static PYApiManager *_g_apiManager;
 static BOOL _isDebug = NO;
@@ -45,15 +70,6 @@ static BOOL _isDebug = NO;
 
 PYSingletonAllocWithZone(_g_apiManager)
 PYSingletonDefaultImplementation
-+ (instancetype)shared
-{
-    PYSingletonLock
-    if ( _g_apiManager == nil ) {
-        _g_apiManager = [PYApiManager object];
-    }
-    return _g_apiManager;
-    PYSingletonUnLock
-}
 
 - (id)init
 {
@@ -80,13 +96,6 @@ PYSingletonDefaultImplementation
     PYSingletonUnLock
 }
 
-- (void)updateModifiedTime:(NSString *)modifyInfo forIdentifier:(NSString *)reqIdentifier
-{
-    PYSingletonLock
-    [_apiCache setObject:modifyInfo forKey:reqIdentifier];
-    PYSingletonUnLock
-}
-
 + (NSString *)errorMessageWithCode:(PYApiErrorCode)code
 {
     static NSString *_errorMsg[] = {
@@ -104,11 +113,6 @@ PYSingletonDefaultImplementation
         return _errorMsg[code - 100];
     }
     return @"Unknow code";
-}
-
-+ (NSError *)apiErrorWithCode:(PYApiErrorCode)code
-{
-    return [self errorWithCode:code message:[PYApiManager errorMessageWithCode:code]];
 }
 
 + (void)invokeApi:(NSString *)apiname
@@ -253,6 +257,31 @@ PYSingletonDefaultImplementation
 
 @dynamic apiOpQueue;
 - (NSOperationQueue *)apiOpQueue { return _apiOpQueue; }
+
+// Update the modified time
+- (void)updateModifiedTime:(NSString *)modifyInfo forIdentifier:(NSString *)reqIdentifier
+{
+    PYSingletonLock
+    [_apiCache setObject:modifyInfo forKey:reqIdentifier];
+    PYSingletonUnLock
+}
+
+// Generate error object
++ (NSError *)apiErrorWithCode:(PYApiErrorCode)code
+{
+    return [self errorWithCode:code message:[PYApiManager errorMessageWithCode:code]];
+}
+
++ (instancetype)shared
+{
+    PYSingletonLock
+    if ( _g_apiManager == nil ) {
+        _g_apiManager = [PYApiManager object];
+    }
+    return _g_apiManager;
+    PYSingletonUnLock
+}
+
 @end
 
 PY_JSON_API_COMMON_IMPL( TestApi, @"/api/login/username/<username>/password/<password>") {

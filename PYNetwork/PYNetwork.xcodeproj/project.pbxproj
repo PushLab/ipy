@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6A0B5261A7535A200240DEC /* PYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0B5251A7535A200240DEC /* PYReachability.m */; };
+		E6A0B5271A75644500240DEC /* PYReachability.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E6A0B5241A7535A200240DEC /* PYReachability.h */; };
 		E6FDC112197F97A0005B4C72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FDC111197F97A0005B4C72 /* Foundation.framework */; };
 		E6FDC117197F97A0005B4C72 /* PYNetwork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E6FDC116197F97A0005B4C72 /* PYNetwork.h */; };
 		E6FDC120197F97A0005B4C72 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FDC11F197F97A0005B4C72 /* XCTest.framework */; };
@@ -47,12 +49,15 @@
 				E6FDC1441980E8CA005B4C72 /* PYApiRequest.h in CopyFiles */,
 				E6FDC1431980E8C7005B4C72 /* PYDomainSwitcher.h in CopyFiles */,
 				E6FDC117197F97A0005B4C72 /* PYNetwork.h in CopyFiles */,
+				E6A0B5271A75644500240DEC /* PYReachability.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E6A0B5241A7535A200240DEC /* PYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYReachability.h; sourceTree = "<group>"; };
+		E6A0B5251A7535A200240DEC /* PYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYReachability.m; sourceTree = "<group>"; };
 		E6FDC10E197F97A0005B4C72 /* libPYNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPYNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6FDC111197F97A0005B4C72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6FDC115197F97A0005B4C72 /* PYNetwork-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYNetwork-Prefix.pch"; sourceTree = "<group>"; };
@@ -138,6 +143,8 @@
 				E6FDC1401980E6B9005B4C72 /* PYApiManager.h */,
 				E6FDC1411980E6B9005B4C72 /* PYApiManager.m */,
 				E6FDC114197F97A0005B4C72 /* Supporting Files */,
+				E6A0B5241A7535A200240DEC /* PYReachability.h */,
+				E6A0B5251A7535A200240DEC /* PYReachability.m */,
 			);
 			path = PYNetwork;
 			sourceTree = "<group>";
@@ -252,6 +259,7 @@
 				E6FDC13F1980E6B0005B4C72 /* PYApiResponse.m in Sources */,
 				E6FDC13C197FAA64005B4C72 /* PYApiRequest.m in Sources */,
 				E6FDC139197F97C2005B4C72 /* PYDomainSwitcher.m in Sources */,
+				E6A0B5261A7535A200240DEC /* PYReachability.m in Sources */,
 				E6FDC1421980E6B9005B4C72 /* PYApiManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
