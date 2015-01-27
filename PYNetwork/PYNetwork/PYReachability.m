@@ -54,8 +54,6 @@
 #import <ifaddrs.h>
 #import <netdb.h>
 
-#import <PYCore/PYCore.h>
-
 // The monitor callback function
 static void _pyReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info);
 

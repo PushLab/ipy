@@ -49,6 +49,7 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <netinet/in.h>
+#import <PYCore/PYCore.h>
 
 // The event id of reachability statue changed.
 #define PYReachabilityChangeNotification        0x0FFF0001
