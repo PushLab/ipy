@@ -7,6 +7,24 @@
 //
 
 /*
+ LGPL V3 Lisence
+ This file is part of cleandns.
+ 
+ PYCore is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ PYData is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with cleandns.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
  LISENCE FOR IPY
  COPYRIGHT (c) 2013, Push Chen.
  ALL RIGHTS RESERVED.
@@ -30,16 +48,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/stat.h>
-
-// Common Type definition
-typedef signed char				Int8;
-typedef signed short int		Int16;
-typedef signed int				Int32;
-typedef signed long long int	Int64;
-typedef unsigned char			Uint8;
-typedef unsigned short int		Uint16;
-typedef unsigned int			Uint32;
-typedef unsigned long long int	Uint64;
 
 #define CLR_RED(x)				"\033[1;31m" #x "\033[0m"   //error
 #define CLR_YELLOW(x)			"\033[1;33m" #x "\033[0m"	//warn
@@ -120,7 +128,7 @@ extern "C" {
      */
     void __formatLogLine(const char * __file,
                          const char * __func,
-                         Uint32 __line,
+                         uint32_t __line,
                          NSString *__log);
     /*
      Print only the log head part, not include the log message.
@@ -128,7 +136,7 @@ extern "C" {
         [TIME]<FUNCTION_NAME:CODE_LINE>
      Always return YES.
      */
-    BOOL __print_logHead(const char * __func, Uint32 __line);
+    BOOL __print_logHead(const char * __func, uint32_t __line);
     /*
      Print the condition expression and return the result of the condition.
      Used in the macro [IF].

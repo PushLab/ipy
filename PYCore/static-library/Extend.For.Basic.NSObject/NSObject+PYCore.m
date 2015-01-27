@@ -7,6 +7,24 @@
 //
 
 /*
+ LGPL V3 Lisence
+ This file is part of cleandns.
+ 
+ PYCore is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ PYData is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with cleandns.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
  LISENCE FOR IPY
  COPYRIGHT (c) 2013, Push Chen.
  ALL RIGHTS RESERVED.
@@ -112,12 +130,15 @@ do {                                                                    \
 
     char _rType[32] = {0};
     method_getReturnType(_m, _rType, 32);
-    if ( strcmp(_rType, "v") == 0 ) {
-        [self performSelector:sel];
-        return nil;
-    } else {
-        return [self performSelector:sel];
-    }
+    SuppressPerformSelectorLeakWarning
+    (
+        if ( strcmp(_rType, "v") == 0 ) {
+            [self performSelector:sel];
+            return nil;
+        } else {
+            return [self performSelector:sel];
+        }
+     );
 }
 - (id)tryPerformSelector:(SEL)sel withObject:(id)object
 {
@@ -129,12 +150,15 @@ do {                                                                    \
 
     char _rType[32] = {0};
     method_getReturnType(_m, _rType, 32);
-    if ( strcmp(_rType, "v") == 0 ) {
-        [self performSelector:sel withObject:object];
-        return nil;
-    } else {
-        return [self performSelector:sel withObject:object];
-    }
+    SuppressPerformSelectorLeakWarning
+    (
+        if ( strcmp(_rType, "v") == 0 ) {
+            [self performSelector:sel withObject:object];
+            return nil;
+        } else {
+            return [self performSelector:sel withObject:object];
+        }
+     );
 }
 - (id)tryPerformSelector:(SEL)sel withObject:(id)obj1 withObject:(id)obj2
 {
@@ -146,12 +170,15 @@ do {                                                                    \
     
     char _rType[32] = {0};
     method_getReturnType(_m, _rType, 32);
-    if ( strcmp(_rType, "v") == 0 ) {
-        [self performSelector:sel withObject:obj1 withObject:obj2];
-        return nil;
-    } else {
-        return [self performSelector:sel withObject:obj1 withObject:obj2];
-    }
+    SuppressPerformSelectorLeakWarning
+    (
+        if ( strcmp(_rType, "v") == 0 ) {
+            [self performSelector:sel withObject:obj1 withObject:obj2];
+            return nil;
+        } else {
+            return [self performSelector:sel withObject:obj1 withObject:obj2];
+        }
+     );
 }
 - (void)_backgroundBlockInvocationSelector:(void(^)())block
 {

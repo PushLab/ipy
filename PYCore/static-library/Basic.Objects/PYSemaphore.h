@@ -7,6 +7,24 @@
 //
 
 /*
+ LGPL V3 Lisence
+ This file is part of cleandns.
+ 
+ PYCore is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ PYData is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with cleandns.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
  LISENCE FOR IPY
  COPYRIGHT (c) 2013, Push Chen.
  ALL RIGHTS RESERVED.
@@ -33,8 +51,8 @@ enum { SEM_MAXCOUNT = 0x0FFFF, SEM_MAXTIMEOUT = 0xFFFFFFFF };
 @interface PYSemaphore : NSObject
 {
     PYSemHandleT                    _sem;
-    Int32                           _max;
-    volatile Int32                  _current;
+    int32_t                         _max;
+    volatile int32_t                _current;
     volatile bool                   _available;
     
     // Mutex to lock the m_Current.
@@ -45,7 +63,7 @@ enum { SEM_MAXCOUNT = 0x0FFFF, SEM_MAXTIMEOUT = 0xFFFFFFFF };
 // Signal count
 @property (nonatomic, readonly) NSUInteger              count;
 @property (nonatomic, readonly) BOOL                    isAvailable;
-@property (nonatomic, readonly) Int32                   maxCount;
+@property (nonatomic, readonly) int32_t                 maxCount;
 
 - (id)initWithCount:(int)initCount;
 - (id)initWithCount:(int)initCount maxCount:(int32_t)max;
